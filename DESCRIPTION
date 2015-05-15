@@ -1,6 +1,6 @@
 Package: queueing
-Version: 0.2.4
-Date: 2015-04-11
+Version: 0.2.5
+Date: 2015-05-15
 Title: Analysis of Queueing Networks and Models
 Author: Pedro Canadilla
 Maintainer: Pedro Canadilla <pedro.canadilla@gmail.com>
@@ -17,7 +17,7 @@ Description: It provides versatile tools for analysis of birth and death based M
 License: GPL-2
 Copyright: Pedro Canadilla
 URL: http://www.r-project.org
-Packaged: 2015-04-12 08:27:53 UTC; oracle
 NeedsCompilation: no
+Packaged: 2015-05-15 10:26:11 UTC; oracle
 Repository: CRAN
-Date/Publication: 2015-04-12 22:51:43
+Date/Publication: 2015-05-15 21:48:57
