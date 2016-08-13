@@ -288,7 +288,7 @@ Engset <- function(k=1, c=0, r=0)
 
 
   acum <- 1 
-  for (i in (1:c)) acum <- ( (i * acum) / ((k - c + 1) * r) ) + 1
+  for (i in (1:c)) acum <- ( (i * acum) / ((k - i + 1) * r) ) + 1
   return(1/acum)
 }
 

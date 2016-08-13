@@ -1,7 +1,7 @@
-f7f4aa26c0fbc683259a551ce9d5eaa3 *ChangeLog
-31fd65ecf9b2ff06693a8589cecf5606 *DESCRIPTION
+bf73be96d2ffeb095fbef2f112a6718d *ChangeLog
+cab7c75f5a1e44831da9671356752fee *DESCRIPTION
 9b171d14be76d9998c8606da39ed60e4 *NAMESPACE
-eb2364c70f4d6d918d562267a2d6fdb9 *R/queueing.R
+23585ec03ec16013fcf913977b0199a5 *R/queueing.R
 0ca99f9f554bd37f5e8894cd8a1f763b *inst/CITATION
 c82af99b92167b693a5375260146a094 *inst/doc/Little_Law_When_Queue_Exists.pdf
 27be89fe075cf66e398cea1558d62e0d *inst/doc/index.html

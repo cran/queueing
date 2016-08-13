@@ -1,3 +1,6 @@
+2016-08-13 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * Fixed Engset calculator. 
+
 2015-11-08 Pedro Canadilla <pedro.canadilla@gmail.com>
     * Fixed NOTE as CRAN checks has detected in the new version of R.
 
