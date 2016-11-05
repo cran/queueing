@@ -2,7 +2,7 @@
 # Import functions
 ############################################################
 importFrom("stats", "dbinom", "dgeom", "dpois", "integrate",
-  "pbinom", "pgeom", "ppois")
+  "pbinom", "pgeom", "ppois", "dgamma", "pgamma")
 
 
 ############################################################

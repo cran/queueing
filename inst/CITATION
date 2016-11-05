@@ -6,4 +6,4 @@ bibentry(bibtype = "Manual",
          author = c(person("Pedro", "Canadilla")),
          year = year,
          note = note,
-         url = "http://CRAN.R-project.org/package=queueing")
+         url = "https://CRAN.R-project.org/package=queueing")

@@ -1,3 +1,8 @@
+2016-10-16 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * Three bugs detected and fixed in the Multiple Class Open Network. CheckInput was checking capacity constraints for delay nodes; the checking of values was wrong, getting array index out of limits error, and finally, some W was wrong calculated in the model when delay centers was provided in a model with routing probabilities. 
+    * In the same way, in the Multiple Class Closed Network the checking of values was wrong, getting array index out of limits errors.
+    * Thank you very much for the contribution of Alexandre Martins <martins.gomes.alex at gmail.com> to bring my attention a function developed by Tom Potter at <https://stat.ethz.ch/pipermail/r-help/2001-September/014986.html>, which makes the B_erlang function atonishing fast.
+
 2016-08-13 Pedro Canadilla <pedro.canadilla@gmail.com>
     * Fixed Engset calculator. 
 

@@ -18,7 +18,12 @@
 \references{
   [Sixto2004] Sixto Rios Insua, Alfonso Mateos Caballero, M Concepcion Bielza Lozoya, Antonio Jimenez Martin (2004).\cr
 \emph{Investigacion Operativa. Modelos deterministicos y estocasticos}.\cr
-Editorial Centro de Estudios Ramon Areces.
+Editorial Centro de Estudios Ramon Areces.\cr
+\cr
+[Jagerman1974] Jagerman, D. L. (1974).\cr
+\emph{Some properties of  the Erlang loss function}.\cr
+Bell System Tech. J. (53), 525-551
+
 }
 
 \seealso{

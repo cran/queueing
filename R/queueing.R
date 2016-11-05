@@ -228,7 +228,7 @@ B_erlang5 <- function(c=1, u=0)
 }
 
 
-B_erlang <- function(c=1, u=0)
+B_erlang_6 <- function(c=1, u=0)
 {
 
   if (is.anomalous(c))
@@ -256,6 +256,34 @@ B_erlang <- function(c=1, u=0)
     tot <- 1 + (tot * i * val)
 
   1/tot    
+}
+
+
+B_erlang <- function(c=1, u=0)
+{
+
+  if (is.anomalous(c))
+    stop("The parameter c is anomalous. Check it!")
+
+  if (is.anomalous(u))
+    stop("The parameter u is anomalous. Check it!")
+
+  if (c<0)
+    stop("The number of servers can not be less than zero!")
+
+  if (u<0)
+    stop("The u parameter can not be negative!")
+
+  if (!is.wholenumber(c))
+    stop("The parameter c has to be an integer number")
+
+  if (c==0) return(1)
+  if (u==0) return(0)
+
+  exp(
+    dgamma(u, shape=c+1, scale=1, log=TRUE) -
+      pgamma(u, shape=c+1, scale=1, log.p=TRUE, lower.tail=FALSE)
+  )    
 }
 
 
@@ -2806,7 +2834,8 @@ doModel <- function(x, newNodes, tLambda)
     prob[i] <- Pn(aux)
  
     if (is_prob_a_matrix)
-      Wk[i] <- W(aux)
+      Wk[i] <- W(aux) * (Throughput(aux) / tLambda)    
+      # old code wrong: it doesn't sum W: Wk[i] <- W(aux)
     else 
       Wk[i] <- W(aux) * x$prob[i]
 
@@ -3498,23 +3527,23 @@ CheckInput.i_MCON <- function(x, ...)
     stop(MCON_dim_vVisit_nodes_vLambda)
 
   #vService has to has at least one element positive
-  i <- 1
-  while (i <= x$nodes)
+  j <- 1
+  while (j <= x$nodes)
   {
-    if (sum(x$vService[i, ]) <= 0)
+    if (sum(x$vService[, j]) <= 0)
       stop("At least some service time has to be greater than zero at each node")
 
-    i <- i + 1
+    j <- j + 1
   }
 
   #vVisit has to has at least one element positive
-  i <- 1
-  while (i <= x$nodes)
+  j <- 1
+  while (j <= x$nodes)
   {
-    if (sum(x$vVisit[i, ]) <= 0)
+    if (sum(x$vVisit[, j]) <= 0)
       stop("At least some visit has to be greater than zero at each node")
 
-    i <- i + 1
+    j <- j + 1
   }
 
   i <- 1
@@ -3525,7 +3554,7 @@ CheckInput.i_MCON <- function(x, ...)
      
     ro_aux <- sum(x$vLambda * x$vVisit[, i] * (x$vService[, i])) 
 
-    if ( ro_aux >= 1 )
+    if (x$vType[i] == "Q" && ro_aux >= 1 )
       stop(paste("The processing capacity of node ", i, " is saturated. The utilization is: ", ro_aux * 100, "%", sep=""))
 
     i <- i + 1
@@ -3754,23 +3783,23 @@ CheckInput.i_MCCN <- function(x, ...)
   }
   
   #vService has to has at least one element positive
-  i <- 1
-  while (i <= x$nodes)
+  j <- 1
+  while (j <= x$nodes)
   {
-    if (sum(x$vService[i, ]) <= 0)
+    if (sum(x$vService[, j]) <= 0)
       stop("At least some service time has to be greater than zero at each node")
 
-    i <- i + 1
+    j <- j + 1
   }
 
   #vVisit has to has at least one element positive
-  i <- 1
-  while (i <= x$nodes)
+  j <- 1
+  while (j <= x$nodes)
   {
-    if (sum(x$vVisit[i, ]) <= 0)
+    if (sum(x$vVisit[, j]) <= 0)
       stop("At least some visit has to be greater than zero at each node")
 
-    i <- i + 1
+    j <- j + 1
   }
 
 }
