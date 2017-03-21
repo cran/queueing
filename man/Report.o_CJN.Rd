@@ -1,19 +1,19 @@
-% File man/summary.o_CJN.Rd
-\name{summary.o_CJN}
-\alias{summary.o_CJN}
-\title{Summary of the results of a Closed Jackson Network}
+% File man/Report.o_CJN.Rd
+\name{Report.o_CJN}
+\alias{Report.o_CJN}
+\title{Reports the results of a Closed Jackson Network}
 \description{
-  Summary of the results of a Closed Jackson Network
+  Reports the results of a Closed Jackson Network
 }
 \usage{
-  \method{summary}{o_CJN}(object, \dots)
+  \method{Report}{o_CJN}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_CJN}
+  \item{x}{a object of class o_CJN}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a Closed Jackson Network model}
+\details{Generates a report of the queueing network received as parameter}
 
 \references{
   [Sixto2004] Sixto Rios Insua, Alfonso Mateos Caballero, M Concepcion Bielza Lozoya, Antonio Jimenez Martin (2004).\cr
@@ -48,7 +48,7 @@ cjn1 <- NewInput.CJN(prob, n, z, operational, 0, 0.001, n1, n2)
 # Check the inputs and build the model
 m_cjn1 <- QueueingModel(cjn1)
 
-summary(m_cjn1)
+Report(m_cjn1)
 
 }
 \keyword{Closed Jackson Network}

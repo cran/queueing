@@ -1,15 +1,15 @@
-% File man/summary.o_OJN.Rd
-\name{summary.o_OJN}
-\alias{summary.o_OJN}
-\title{Summary of the results of an Open Jackson Network}
+% File man/print.summary.o_OJN.Rd
+\name{print.summary.o_OJN}
+\alias{print.summary.o_OJN}
+\title{Reports the results of an Open Jackson Network}
 \description{
-  Summary of the results of an Open Jackson Network
+  Reports the results of an Open Jackson Network
 }
 \usage{
-  \method{summary}{o_OJN}(object, \dots)
+  \method{print}{summary.o_OJN}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_OJN}
+  \item{x}{a object of class summary.o_OJN}
   \item{\dots}{aditional arguments}
 }
 
@@ -42,7 +42,7 @@ i_ojn <- NewInput.OJN(prob, n1, n2, n3, n4)
 
 o_ojn <- QueueingModel(i_ojn)
 
-summary(o_ojn)
+print(summary(o_ojn))
 
 }
 \keyword{Open Jackson Network}

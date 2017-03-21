@@ -9,7 +9,7 @@
   QueueingModel(x, \dots)
 }
 \arguments{
-  \item{x}{a object of class i_MM1, i_MMC, i_MM1K, i_MMCK, i_MM1KK, i_MMCKK, i_MMCC, i_MMCKM, i_MMInfKK, i_MMInf, o_OJN, o_MCON}
+  \item{x}{a object of class i_MM1, i_MMC, i_MM1K, i_MMCK, i_MM1KK, i_MMCKK, i_MMCC, i_MMCKM, i_MMInfKK, i_MMInf, i_OJN, i_MCON}
   \item{\dots}{aditional arguments}
 }
 

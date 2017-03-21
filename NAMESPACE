@@ -19,6 +19,8 @@ NewInput.MM1,
 CheckInput.i_MM1,
 QueueingModel.i_MM1,
 summary.o_MM1,
+print.summary.o_MM1,
+Report.o_MM1,
 RO.o_MM1,
 Pn.o_MM1,
 Qn.o_MM1,
@@ -37,6 +39,8 @@ NewInput.MMC,
 CheckInput.i_MMC,
 QueueingModel.i_MMC,
 summary.o_MMC,
+print.summary.o_MMC,
+Report.o_MMC,
 Inputs.o_MMC,
 RO.o_MMC,
 Lq.o_MMC,
@@ -55,6 +59,8 @@ NewInput.MM1KK,
 CheckInput.i_MM1KK,
 QueueingModel.i_MM1KK,
 summary.o_MM1KK,
+print.summary.o_MM1KK,
+Report.o_MM1KK,
 Inputs.o_MM1KK,
 RO.o_MM1KK,
 Lq.o_MM1KK,
@@ -76,6 +82,8 @@ NewInput.MMCKK,
 CheckInput.i_MMCKK,
 QueueingModel.i_MMCKK,
 summary.o_MMCKK,
+print.summary.o_MMCKK,
+Report.o_MMCKK,
 Inputs.o_MMCKK,
 L.o_MMCKK,
 VN.o_MMCKK,
@@ -94,6 +102,8 @@ NewInput.MMCKM,
 CheckInput.i_MMCKM,
 QueueingModel.i_MMCKM,
 summary.o_MMCKM,
+print.summary.o_MMCKM,
+Report.o_MMCKM,
 Inputs.o_MMCKM,
 L.o_MMCKM,
 VN.o_MMCKM,
@@ -111,6 +121,8 @@ NewInput.MMInfKK,
 CheckInput.i_MMInfKK,
 QueueingModel.i_MMInfKK,
 summary.o_MMInfKK,
+print.summary.o_MMInfKK,
+Report.o_MMInfKK,
 Inputs.o_MMInfKK,
 L.o_MMInfKK,
 VN.o_MMInfKK,
@@ -130,6 +142,8 @@ NewInput.MMInf,
 CheckInput.i_MMInf,
 QueueingModel.i_MMInf,
 summary.o_MMInf,
+print.summary.o_MMInf,
+Report.o_MMInf,
 Inputs.o_MMInf,
 L.o_MMInf,
 VN.o_MMInf,
@@ -148,6 +162,8 @@ NewInput.MM1K,
 CheckInput.i_MM1K,
 QueueingModel.i_MM1K,
 summary.o_MM1K,
+print.summary.o_MM1K,
+Report.o_MM1K,
 Inputs.o_MM1K,
 L.o_MM1K,
 VN.o_MM1K,
@@ -168,6 +184,8 @@ NewInput.MMCK,
 CheckInput.i_MMCK,
 QueueingModel.i_MMCK,
 summary.o_MMCK,
+print.summary.o_MMCK,
+Report.o_MMCK,
 Inputs.o_MMCK,
 RO.o_MMCK,
 L.o_MMCK,
@@ -186,6 +204,8 @@ NewInput.MMCC,
 CheckInput.i_MMCC,
 QueueingModel.i_MMCC,
 summary.o_MMCC,
+print.summary.o_MMCC,
+Report.o_MMCC,
 Inputs.o_MMCC,
 L.o_MMCC,
 VN.o_MMCC,
@@ -206,6 +226,10 @@ NewInput2.OJN,
 NewInput3.OJN,
 CheckInput.i_OJN,
 QueueingModel.i_OJN,
+summary.o_OJN,
+print.summary.o_OJN,
+Report.o_OJN,
+Inputs.o_OJN,
 Throughput.o_OJN,
 L.o_OJN,
 W.o_OJN,
@@ -219,6 +243,9 @@ NewInput2.CJN,
 NewInput3.CJN,
 CheckInput.i_CJN,
 QueueingModel.i_CJN,
+summary.o_CJN,
+print.summary.o_CJN,
+Report.o_CJN,
 Inputs.o_CJN,
 Throughput.o_CJN,
 L.o_CJN,
@@ -231,6 +258,9 @@ Throughputn.o_CJN,
 NewInput.MCON,
 CheckInput.i_MCON,
 QueueingModel.i_MCON,
+summary.o_MCON,
+print.summary.o_MCON,
+Report.o_MCON,
 Inputs.o_MCON,
 W.o_MCON,
 L.o_MCON,
@@ -249,6 +279,9 @@ Throughputck.o_MCON,
 NewInput.MCCN,
 CheckInput.i_MCCN,
 QueueingModel.i_MCCN,
+summary.o_MCCN,
+print.summary.o_MCCN,
+Report.o_MCCN,
 Inputs.o_MCCN,
 W.o_MCCN,
 L.o_MCCN,
@@ -268,6 +301,9 @@ Throughputcn.o_MCCN,
 NewInput.MCMN,
 CheckInput.i_MCMN,
 QueueingModel.i_MCMN,
+summary.o_MCMN,
+print.summary.o_MCMN,
+Report.o_MCMN,
 Inputs.o_MCMN,
 L.o_MCMN,
 W.o_MCMN,
@@ -314,7 +350,8 @@ Lck,
 Wck,
 Throughputck,
 Throughputn,
-Throughputcn
+Throughputcn,
+Report
 )
 
 ############################################################
@@ -594,6 +631,24 @@ S3method(ROck, o_MCON)
 S3method(ROck, o_MCCN)
 S3method(ROck, o_MCMN)
 
+
+S3method(Report, o_MM1)
+S3method(Report, o_MM1K)
+S3method(Report, o_MMC)
+S3method(Report, o_MMInf)
+S3method(Report, o_MMCK)
+S3method(Report, o_MMCC)
+S3method(Report, o_MM1KK)
+S3method(Report, o_MMCKK)
+S3method(Report, o_MMCKM)
+S3method(Report, o_MMInfKK)
+S3method(Report, o_OJN)
+S3method(Report, o_CJN)
+S3method(Report, o_MCON)
+S3method(Report, o_MCCN)
+S3method(Report, o_MCMN)
+
+
 S3method(summary, o_MM1)
 S3method(summary, o_MM1K)
 S3method(summary, o_MMC)
@@ -609,4 +664,21 @@ S3method(summary, o_CJN)
 S3method(summary, o_MCON)
 S3method(summary, o_MCCN)
 S3method(summary, o_MCMN)
+
+
+S3method(print, summary.o_MM1)
+S3method(print, summary.o_MM1K)
+S3method(print, summary.o_MMC)
+S3method(print, summary.o_MMInf)
+S3method(print, summary.o_MMCK)
+S3method(print, summary.o_MMCC)
+S3method(print, summary.o_MM1KK)
+S3method(print, summary.o_MMCKK)
+S3method(print, summary.o_MMCKM)
+S3method(print, summary.o_MMInfKK)
+S3method(print, summary.o_OJN)
+S3method(print, summary.o_CJN)
+S3method(print, summary.o_MCON)
+S3method(print, summary.o_MCCN)
+S3method(print, summary.o_MCMN)
 

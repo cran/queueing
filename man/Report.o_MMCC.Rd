@@ -1,19 +1,19 @@
-% File man/summary.o_MMCC.Rd
-\name{summary.o_MMCC}
-\alias{summary.o_MMCC}
-\title{Summary of the results of a M/M/c/c queueing model}
+% File man/Report.o_MMCC.Rd
+\name{Report.o_MMCC}
+\alias{Report.o_MMCC}
+\title{Reports the results of a M/M/c/c queueing model}
 \description{
-  Summary of the results of a M/M/c/c queueing model.
+  Reports the results of a M/M/c/c queueing model.
 }
 \usage{
-  \method{summary}{o_MMCC}(object, \dots)
+  \method{Report}{o_MMCC}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MMCC}
+  \item{x}{a object of class o_MMCC}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a M/M/c/c queueing model}
+\details{Generates a report of the queueing model received as parameter}
 
 \references{
   [Sixto2004] Sixto Rios Insua, Alfonso Mateos Caballero, M Concepcion Bielza Lozoya, Antonio Jimenez Martin (2004).\cr
@@ -35,6 +35,6 @@ i_mmcc <- NewInput.MMCC(lambda=3, mu=0.25, c=15)
 o_mmcc <- QueueingModel(i_mmcc)
 
 ## Report the results
-summary(o_mmcc)
+Report(o_mmcc)
 }
 \keyword{M/M/c/c}

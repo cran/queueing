@@ -1,15 +1,15 @@
-% File man/summary.o_MMCK.Rd
-\name{summary.o_MMCK}
-\alias{summary.o_MMCK}
+% File man/print.summary.o_MMCK.Rd
+\name{print.summary.o_MMCK}
+\alias{print.summary.o_MMCK}
 \title{Summary of the results of a M/M/c/K queueing model}
 \description{
   Summary of the results of a M/M/c/K queueing model.
 }
 \usage{
-  \method{summary}{o_MMCK}(object, \dots)
+  \method{print}{summary.o_MMCK}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MMCK}
+  \item{x}{a object of class summary.o_MMCK}
   \item{\dots}{aditional arguments}
 }
 
@@ -35,6 +35,6 @@ i_mmck <- NewInput.MMCK(lambda=8, mu=4, c=5, k=12)
 o_mmck <- QueueingModel(i_mmck)
 
 ## Report the results
-summary(o_mmck)
+print(summary(o_mmck))
 }
 \keyword{M/M/c/K}

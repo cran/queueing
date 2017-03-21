@@ -1,19 +1,21 @@
-% File man/summary.o_MM1.Rd
-\name{summary.o_MM1}
-\alias{summary.o_MM1}
-\title{Summary of the results of a M/M/1 queueing model}
+% File man/Report.Rd
+\name{Report}
+\alias{Report}
+\title{Reports the results of a queueing model}
 \description{
-  Summary of the results of a M/M/1 queueing model.
+  Reports the results of a queueing model.
 }
+
 \usage{
-  \method{summary}{o_MM1}(object, \dots)
+  Report(x, \dots)
 }
+
 \arguments{
-  \item{object}{a object of class o_MM1}
+  \item{x}{i_MM1, i_MMC, i_MM1K, i_MMCK, i_MM1KK, i_MMCKK, i_MMCC, i_MMCKM, i_MMInfKK, i_MMInf, i_OJN, i_MCON}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a M/M/1 queueing model}
+\details{Generic S3 method to report a queueing model}
 
 \references{
   [Sixto2004] Sixto Rios Insua, Alfonso Mateos Caballero, M Concepcion Bielza Lozoya, Antonio Jimenez Martin (2004).\cr
@@ -22,7 +24,7 @@ Editorial Centro de Estudios Ramon Areces.
 }
 
 \seealso{
-  \code{\link{QueueingModel.i_MM1}}.
+  \code{\link{QueueingModel}}.
 }
 
 
@@ -35,6 +37,6 @@ i_mm1 <- NewInput.MM1(lambda=1/4, mu=1/3, n=0)
 o_mm1 <- QueueingModel(i_mm1)
 
 ## Report the results
-summary(o_mm1)
+Report(o_mm1)
 }
 \keyword{M/M/1}

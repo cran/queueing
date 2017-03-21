@@ -1,19 +1,19 @@
-% File man/summary.o_MMCKK.Rd
-\name{summary.o_MMCKK}
-\alias{summary.o_MMCKK}
-\title{Summary of the results of a M/M/c/K/K queueing model}
+% File man/Report.o_MMCKK.Rd
+\name{Report.o_MMCKK}
+\alias{Report.o_MMCKK}
+\title{Reports the results of a M/M/c/K/K queueing model}
 \description{
-  Summary of the results of a M/M/c/K/K queueing model.
+  Reports the results of a M/M/c/K/K queueing model.
 }
 \usage{
-  \method{summary}{o_MMCKK}(object, \dots)
+  \method{Report}{o_MMCKK}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MMCKK}
+  \item{x}{a object of class o_MMCKK}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a M/M/c/K/K queueing model}
+\details{Generates a report of the queueing model received as parameter}
 
 \references{
   [Sixto2004] Sixto Rios Insua, Alfonso Mateos Caballero, M Concepcion Bielza Lozoya, Antonio Jimenez Martin (2004).\cr
@@ -34,7 +34,7 @@ i_mmckk <- NewInput.MMCKK(lambda=8, mu=2, c=5, k=12, method=0)
 o_mmckk <- QueueingModel(i_mmckk)
 
 ## Report the results
-summary(o_mmckk)
+Report(o_mmckk)
 }
 \keyword{M/M/c/K/K}
 

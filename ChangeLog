@@ -1,3 +1,10 @@
+2017-03-20 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * Model MCMN had a bug. Solved.
+    * New summary functions following R FAQ. summary now returns an object of class summary.o_MM1, and then new print functions prints in a table format (using data.frame) the main results of the model.
+
+2016-12-25 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * old summary functions renamed to Report.
+
 2016-10-16 Pedro Canadilla <pedro.canadilla@gmail.com>
     * Three bugs detected and fixed in the Multiple Class Open Network. CheckInput was checking capacity constraints for delay nodes; the checking of values was wrong, getting array index out of limits error, and finally, some W was wrong calculated in the model when delay centers was provided in a model with routing probabilities. 
     * In the same way, in the Multiple Class Closed Network the checking of values was wrong, getting array index out of limits errors.

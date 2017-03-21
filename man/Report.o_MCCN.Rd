@@ -1,19 +1,19 @@
-% File man/summary.o_MCCN.Rd
-\name{summary.o_MCCN}
-\alias{summary.o_MCCN}
-\title{Summary of the results of a MultiClass Closed Network}
+% File man/Report.o_MCCN.Rd
+\name{Report.o_MCCN}
+\alias{Report.o_MCCN}
+\title{Reports the results of a MultiClass Closed Network}
 \description{
-  Summary of the results of a MultiClass Closed Network
+  Reports the results of a MultiClass Closed Network
 }
 \usage{
-  \method{summary}{o_MCCN}(object, \dots)
+  \method{Report}{o_MCCN}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MCCN}
+  \item{x}{a object of class o_MCCN}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a queueing network model}
+\details{Generates a report of the queueing network received as parameter}
 
 \references{
   [Lazowska84] Edward D. Lazowska, John Zahorjan, G. Scott Graham, and Kenneth C. Sevcik (1984).\cr
@@ -42,7 +42,7 @@ i_MCCN1 <- NewInput.MCCN(classes, vNumber, vThink, nodes, vType, vVisit, vServic
 # Build the model
 o_MCCN1 <- QueueingModel(i_MCCN1)
 
-summary(o_MCCN1)
+Report(o_MCCN1)
 
 }
 \keyword{MultiClass Closed Network}

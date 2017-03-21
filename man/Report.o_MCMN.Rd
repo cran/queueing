@@ -1,19 +1,19 @@
-% File man/summary.o_MCMN.Rd
-\name{summary.o_MCMN}
-\alias{summary.o_MCMN}
-\title{Summary of the results of a MultiClass Mixed Network}
+% File man/Report.o_MCMN.Rd
+\name{Report.o_MCMN}
+\alias{Report.o_MCMN}
+\title{Reports the results of a MultiClass Mixed Network}
 \description{
-  Summary of the results of a MultiClass Mixed Network
+  Reports the results of a MultiClass Mixed Network
 }
 \usage{
-  \method{summary}{o_MCMN}(object, \dots)
+  \method{Report}{o_MCMN}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MCMN}
+  \item{x}{a object of class o_MCMN}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a MultiClass Mixed Network model}
+\details{Generates a report of the queueing network received as parameter}
 
 \references{
   [Lazowska84] Edward D. Lazowska, John Zahorjan, G. Scott Graham, and Kenneth C. Sevcik (1984).\cr
@@ -43,7 +43,7 @@ i_mcmn1 <- NewInput.MCMN(classes, vLambda, vNumber, vThink, nodes, vType, vVisit
 # Build the model
 o_mcmn1 <- QueueingModel(i_mcmn1)
 
-summary(o_mcmn1)
+Report(o_mcmn1)
 
 }
 \keyword{MultiClass Mixed Network}

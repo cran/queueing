@@ -1,15 +1,15 @@
-% File man/summary.o_MCMN.Rd
-\name{summary.o_MCMN}
-\alias{summary.o_MCMN}
+% File man/print.summary.o_MCMN.Rd
+\name{print.summary.o_MCMN}
+\alias{print.summary.o_MCMN}
 \title{Summary of the results of a MultiClass Mixed Network}
 \description{
   Summary of the results of a MultiClass Mixed Network
 }
 \usage{
-  \method{summary}{o_MCMN}(object, \dots)
+  \method{print}{summary.o_MCMN}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MCMN}
+  \item{x}{a object of class summary.o_MCMN}
   \item{\dots}{aditional arguments}
 }
 
@@ -43,7 +43,7 @@ i_mcmn1 <- NewInput.MCMN(classes, vLambda, vNumber, vThink, nodes, vType, vVisit
 # Build the model
 o_mcmn1 <- QueueingModel(i_mcmn1)
 
-summary(o_mcmn1)
+print(summary(o_mcmn1))
 
 }
 \keyword{MultiClass Mixed Network}

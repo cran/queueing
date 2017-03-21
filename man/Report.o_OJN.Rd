@@ -1,19 +1,19 @@
-% File man/summary.o_OJN.Rd
-\name{summary.o_OJN}
-\alias{summary.o_OJN}
-\title{Summary of the results of an Open Jackson Network}
+% File man/Report.o_OJN.Rd
+\name{Report.o_OJN}
+\alias{Report.o_OJN}
+\title{Reports the results of an Open Jackson Network}
 \description{
-  Summary of the results of an Open Jackson Network
+  Reports the results of an Open Jackson Network
 }
 \usage{
-  \method{summary}{o_OJN}(object, \dots)
+  \method{Report}{o_OJN}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_OJN}
+  \item{x}{a object of class o_OJN}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries an Open Jackson Network model}
+\details{Generates a report of the queueing network received as parameter}
 
 \references{
   [Sixto2004] Sixto Rios Insua, Alfonso Mateos Caballero, M Concepcion Bielza Lozoya, Antonio Jimenez Martin (2004).\cr
@@ -42,7 +42,7 @@ i_ojn <- NewInput.OJN(prob, n1, n2, n3, n4)
 
 o_ojn <- QueueingModel(i_ojn)
 
-summary(o_ojn)
+Report(o_ojn)
 
 }
 \keyword{Open Jackson Network}

@@ -1,15 +1,15 @@
-% File man/summary.o_MM1K.Rd
-\name{summary.o_MM1K}
-\alias{summary.o_MM1K}
+% File man/print.summary.o_MM1K.Rd
+\name{print.summary.o_MM1K}
+\alias{print.summary.o_MM1K}
 \title{Summary of the results of a M/M/1/K queueing model}
 \description{
   Summary of the results of a M/M/1/K queueing model.
 }
 \usage{
-  \method{summary}{o_MM1K}(object, \dots)
+  \method{print}{summary.o_MM1K}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MM1K}
+  \item{x}{a object of class summary.o_MM1K}
   \item{\dots}{aditional arguments}
 }
 
@@ -35,6 +35,6 @@ i_mm1k <- NewInput.MM1K(lambda=5, mu=5.714, k=15)
 o_mm1k <- QueueingModel(i_mm1k)
 
 ## Report the results
-summary(o_mm1k)
+print(summary(o_mm1k))
 }
 \keyword{M/M/1/K}

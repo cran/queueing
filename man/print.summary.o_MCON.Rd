@@ -1,19 +1,19 @@
-% File man/summary.o_MCON.Rd
-\name{summary.o_MCON}
-\alias{summary.o_MCON}
+% File man/print.summary.o_MCON.Rd
+\name{print.summary.o_MCON}
+\alias{print.summary.o_MCON}
 \title{Summary of the results of a MultiClass Open Network}
 \description{
   Summary of the results of a MultiClass Open Network
 }
 \usage{
-  \method{summary}{o_MCON}(object, \dots)
+  \method{print}{summary.o_MCON}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MCON}
+  \item{x}{a object of class summary.o_MCON}
   \item{\dots}{aditional arguments}
 }
 
-\details{Summaries a MultiClass Open Network}
+\details{Summaries a MultiClass Open Network model}
 
 \references{
   [Lazowska84] Edward D. Lazowska, John Zahorjan, G. Scott Graham, and Kenneth C. Sevcik (1984).\cr
@@ -41,7 +41,7 @@ i_mcon1 <- NewInput.MCON(classes, vLambda, nodes, vType, vVisit, vService)
 # Build the model
 o_mcon1 <- QueueingModel(i_mcon1)
 
-summary(o_mcon1)
+print(summary(o_mcon1))
 
 }
 \keyword{MultiClass Open Network}

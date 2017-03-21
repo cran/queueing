@@ -1,15 +1,15 @@
-% File man/summary.o_MMInf.Rd
-\name{summary.o_MMInf}
-\alias{summary.o_MMInf}
+% File man/print.summary.o_MMInf.Rd
+\name{print.summary.o_MMInf}
+\alias{print.summary.o_MMInf}
 \title{Summary of the results of a M/M/Infinite queueing model}
 \description{
   Summary of the results of a M/M/Infinite queueing model.
 }
 \usage{
-  \method{summary}{o_MMInf}(object, \dots)
+  \method{print}{summary.o_MMInf}(x, \dots)
 }
 \arguments{
-  \item{object}{a object of class o_MMInf}
+  \item{x}{a object of class summary.o_MMInf}
   \item{\dots}{aditional arguments}
 }
 
@@ -34,6 +34,6 @@ i_mminf <- NewInput.MMInf(lambda=0.25, mu=4, n=0)
 o_mminf <- QueueingModel(i_mminf)
 
 ## Report the results
-summary(o_mminf)
+print(summary(o_mminf))
 }
 \keyword{M/M/Infinite}

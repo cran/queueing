@@ -34,6 +34,7 @@ Wk             <- function(x, ...) UseMethod("Wk")
 Wck            <- function(x, ...) UseMethod("Wck")
 ROk            <- function(x, ...) UseMethod("ROk")
 ROck           <- function(x, ...) UseMethod("ROck")
+Report         <- function(x, ...) UseMethod("Report")
 
 
 ############################################################
@@ -60,6 +61,13 @@ is.anomalous <- function(x)
 }
 
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
+
+
+print_summary  <- function(x, ...)
+{
+  print(x$el, ...)
+  invisible(x)
+}
 
 
 C_erlang2 <- function(c, r)
@@ -390,11 +398,11 @@ tpoisson <- function(n, maximum, lambda)
 
 ############################################################
 ############################################################
-## FUNTION TO SUMMARYZE BASIC MARKOVIAN MODELS 
+## FUNTION TO REPORT BASIC MARKOVIAN MODELS 
 ############################################################
 ############################################################
 
-summaryAux <- function(object)
+reportAux <- function(object)
 { 
   oclass <- class(object)
 
@@ -553,11 +561,11 @@ summaryAux <- function(object)
 
 ############################################################
 ############################################################
-## FUNTION TO SUMMARYZE SINGLE CLASS NETWORKS 
+## FUNTION TO REPORT SINGLE CLASS NETWORKS 
 ############################################################
 ############################################################
 
-summarySingleClass <- function(object)
+reportSingleClass <- function(object)
 {
    
   classObject <- class(object)
@@ -606,11 +614,11 @@ summarySingleClass <- function(object)
 
 ############################################################
 ############################################################
-## FUNTION TO SUMMARYZE MULTIPLE CLASS NETWORKS 
+## FUNTION TO REPORT MULTIPLE CLASS NETWORKS 
 ############################################################
 ############################################################
 
-summaryMultiClass <- function(object)
+reportMultiClass <- function(object)
 {
   if (class(object) != "o_MCON" && class(object) != "o_MCCN" && class(object) != "o_MCMN")
     stop("Incorrect class")
@@ -756,22 +764,8 @@ CompareQueueingModels2 <- function(models)
     Wqq         <- c(Wqq, mod$Wqq)
   }
   
-  #print(lambda)
-  #print(mu)
-  #print(c)
-  #print(k)
-  #print(m)
-  #print(RO)
-  #print(Lq)
-  #print(Wq)
-  #print(Throughput)
-  #print(L)
-  #print(W)
-  #print(Wqq)
-  #print(Lqq)
-  
   data.frame(
-    lambda=lambda, mu=mu, c=c, k=k, m=m, RO=RO, P0 = P0, Lq=Lq, Wq=Wq, Throughput=Throughput,
+    lambda=lambda, mu=mu, c=c, k=k, m=m, RO=RO, P0 = P0, Lq=Lq, Wq=Wq, X=Throughput,
     L=L, W=W, Wqq=Wqq, Lqq=Lqq
   )
 }
@@ -783,6 +777,234 @@ CompareQueueingModels <- function(model, ...)
   CompareQueueingModels2(models)    
 }
 
+
+
+############################################################
+############################################################
+## FUNTION TO SUMMARIZE SINGLE CLASS NETWORKS 
+############################################################
+############################################################
+
+summarySingleClass <- function(object)
+{
+
+  classObject <- class(object)
+
+  if (class(object) != "o_OJN" && class(object) != "o_CJN")
+    stop("Incorrect class")
+
+  #build the table
+
+  # complete network
+  Throughput  <- c()
+  L           <- c()
+  W           <- c()
+
+  # Node
+  ROk          <- c()
+  Throughputk  <- c()
+  Lk           <- c()
+  Wk           <- c()
+
+  rnames       <- c()
+
+  # Complete Network
+  L <- c(L, object$L)  
+  W <- c(W, object$W)
+  Throughput <- c(Throughput, object$Throughput)
+
+  ROk          <- c(ROk, NA)
+  Throughputk  <- c(Throughputk, NA)
+  Lk           <- c(Lk, NA)
+  Wk           <- c(Wk, NA)
+
+  rnames       <- c(rnames, "Net")   
+ 
+  i <- 1
+  while (i <= length(object$ROk))
+  {
+    L            <- c(L, NA)  
+    W            <- c(W, NA)
+    Throughput   <- c(Throughput, NA)
+    ROk          <- c(ROk, object$ROk[i])
+    Throughputk  <- c(Throughputk, object$Throughputk[i])
+    Lk           <- c(Lk, object$Lk[i])
+    Wk           <- c(Wk, object$Wk[i])
+
+    rnames       <- c(rnames, paste("Nd", as.character(i), sep=""))
+
+    i <- i + 1
+  }
+
+
+  res <- 
+    data.frame(
+      L  = L,  W  = W,  X  = Throughput,
+      Lk = Lk, Wk = Wk, Xk = Throughputk, ROk = ROk 
+    )
+
+  # Rowname change
+  rownames(res) <- rnames
+  res
+
+}
+
+
+############################################################
+############################################################
+## FUNTION TO SUMMARIZE MULTIPLE CLASS NETWORKS 
+############################################################
+############################################################
+
+
+summaryMultiClass <- function(object)
+{
+  if (class(object) != "o_MCON" && class(object) != "o_MCCN" && class(object) != "o_MCMN")
+    stop("Incorrect class")
+
+
+  #build the table
+
+  # complete network
+  L            <- c()
+  W            <- c()
+  Throughput   <- c()
+  
+
+  # Class
+  Lc           <- c()
+  Wc           <- c()
+  Throughputc  <- c()
+
+  # Node
+  ROk          <- c()
+  Lk           <- c()
+  Wk           <- c()
+  Throughputk  <- c()
+  
+  # ClassNode
+  ROck         <- c()
+  Lck          <- c()
+  Wck          <- c()
+  Throughputck <- c()
+
+  rnames       <- c() 
+
+
+  # Complete Network
+  L <- c(L, object$L)  
+  W <- c(W, object$W)
+  Throughput <- c(Throughput, object$Throughput)
+
+  Lc          <- c(Lc, NA)
+  Wc          <- c(Wc, NA)
+  Throughputc <- c(Throughputc, NA)
+
+  ROk          <- c(ROk, NA)
+  Lk           <- c(Lk, NA)
+  Wk           <- c(Wk, NA)
+  Throughputk  <- c(Throughputk, NA)
+  
+  ROck         <- c(ROck, NA)
+  Lck          <- c(Lck, NA)
+  Wck          <- c(Wck, NA)
+  Throughputck <- c(Throughputck, NA)
+
+  rnames       <- c(rnames, "Net")  
+
+ 
+  # Classes
+  for (i in (1:object$Inputs$classes))
+  {
+    L            <- c(L, NA)
+    W            <- c(W, NA)
+    Throughput   <- c(Throughput, NA)
+    
+    Lc           <- c(Lc, object$Lc[i])
+    Wc           <- c(Wc, object$Wc[i])
+    Throughputc  <- c(Throughputc, object$Throughputc[i])
+    
+    ROk          <- c(ROk, NA)
+    Lk           <- c(Lk, NA)
+    Wk           <- c(Wk, NA)
+    Throughputk  <- c(Throughputk, NA)
+
+    ROck         <- c(ROck, NA)
+    Lck          <- c(Lck, NA)
+    Wck          <- c(Wck, NA)
+    Throughputck <- c(Throughputck, NA)
+
+    rnames       <- c(rnames, paste("Cl", as.character(i), sep=""))
+
+  }
+
+  # Nodes
+  for (i in (1:object$Inputs$nodes))
+  {
+    L            <- c(L, NA)
+    W            <- c(W, NA)
+    Throughput   <- c(Throughput, NA)
+    
+    Lc           <- c(Lc, NA)
+    Wc           <- c(Wc, NA)
+    Throughputc  <- c(Throughputc, NA)
+    
+    ROk          <- c(ROk, object$ROk[i])
+    Lk           <- c(Lk, object$Lk[i])
+    Wk           <- c(Wk, object$Wk[i])
+    Throughputk  <- c(Throughputk, object$Throughputk[i])
+
+    ROck         <- c(ROck, NA)
+    Lck          <- c(Lck, NA)
+    Wck          <- c(Wck, NA)
+    Throughputck <- c(Throughputck, NA)
+
+    rnames       <- c(rnames, paste("Nd", as.character(i), sep=""))
+
+  }
+
+  #Per class and node
+  for (i in (1:object$Inputs$classes))
+  {
+    for (j in (1:object$Inputs$nodes))
+    {
+      
+      L            <- c(L, NA)
+      W            <- c(W, NA)
+      Throughput   <- c(Throughput, NA)
+    
+      Lc           <- c(Lc, NA)
+      Wc           <- c(Wc, NA)
+      Throughputc  <- c(Throughputc, NA)
+    
+      ROk          <- c(ROk, NA)      
+      Lk           <- c(Lk, NA)
+      Wk           <- c(Wk, NA)
+      Throughputk  <- c(Throughputk, NA)
+
+      ROck         <- c(ROck, object$ROck[i, j])
+      Lck          <- c(Lck, object$Lck[i, j])
+      Wck          <- c(Wck, object$Wck[i, j])
+      Throughputck <- c(Throughputck, object$Throughputck[i, j])
+
+      rnames       <- c(rnames, paste("CN", as.character(i), as.character(j), sep=""))
+    }
+  }
+
+
+  res <-
+    data.frame(
+      L   = L,    W   = W,    X   = Throughput,
+      Lc  = Lc,   Wc  = Wc,   Xc  = Throughputc,
+      Lk  = Lk,   Wk  = Wk,   Xk  = Throughputk,   ROk  = ROk,
+      Lck = Lck,  Wck = Wck,  Xck = Throughputck,  ROck = ROck
+    )
+  
+  # Rowname change
+  rownames(res) <- rnames
+  res  
+  
+}
 
 
 ############################################################
@@ -826,7 +1048,6 @@ CheckInput.i_MM1 <- function(x, ...)
 	 stop(MM1_ro_warning)
  }
 }
-
 
 
 QueueingModel.i_MM1 <- function(x, ...)
@@ -886,12 +1107,23 @@ Lqq.o_MM1        <- function(x, ...) { x$Lqq }
 Inputs.o_MM1     <- function(x, ...) { x$Inputs }
 Throughput.o_MM1 <- function(x, ...) { x$Throughput }
 
+Report.o_MM1 <- function(x, ...)
+{ 
+  reportAux(x)
+}
+
 summary.o_MM1 <- function(object, ...)
 { 
-  summaryAux(object)
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
 }
 
 
+print.summary.o_MM1  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 ############################################################
 ## Model M/M/C
@@ -1114,11 +1346,24 @@ Qn.o_MMC         <- function(x, ...) { x$Qn }
 Throughput.o_MMC <- function(x, ...) { x$Throughput }
 
 
-summary.o_MMC <- function(object, ...)
+Report.o_MMC <- function(x, ...)
 { 
-  summaryAux(object)
+  reportAux(x)
 }
 
+
+summary.o_MMC <- function(object, ...)
+{ 
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMC  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 
 ###############################################################
@@ -1389,11 +1634,24 @@ Qn.o_MM1KK         <- function(x, ...) { x$Qn }
 Throughput.o_MM1KK <- function(x, ...) { x$Throughput }
 
 
-summary.o_MM1KK <- function(object, ...)
+Report.o_MM1KK <- function(x, ...)
 { 
-  summaryAux(object)  
+  reportAux(x)  
 }
 
+
+summary.o_MM1KK <- function(object, ...)
+{ 
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MM1KK  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 ###############################################################
 ###############################################################
@@ -1734,11 +1992,24 @@ Wqq.o_MMCKK        <- function(x, ...) { x$Wqq }
 Pn.o_MMCKK         <- function(x, ...) { x$Pn }
 Qn.o_MMCKK         <- function(x, ...) { x$Qn }
 
-summary.o_MMCKK <- function(object, ...)
+Report.o_MMCKK <- function(x, ...)
 { 
-  summaryAux(object)
+  reportAux(x)
 }
 
+
+summary.o_MMCKK <- function(object, ...)
+{ 
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMCKK  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 ###############################################################
 ###############################################################
@@ -2005,11 +2276,24 @@ Pn.o_MMCKM         <- function(x, ...) { x$Pn }
 Qn.o_MMCKM         <- function(x, ...) { x$Qn }
 
 
-summary.o_MMCKM    <- function(object, ...)
+Report.o_MMCKM    <- function(x, ...)
 { 
-  summaryAux(object)
+  reportAux(x)
 }
 
+
+summary.o_MMCKM <- function(object, ...)
+{ 
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMCKM  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 ############################################################
 ############################################################
@@ -2132,12 +2416,24 @@ Qn.o_MMInfKK         <- function(x, ...) { x$Qn }
 Throughput.o_MMInfKK <- function(x, ...) { x$Throughput }
 
 
-summary.o_MMInfKK <- function(object, ...)
+Report.o_MMInfKK <- function(x, ...)
 { 
-  summaryAux(object)
+  reportAux(x)
 }
 
 
+summary.o_MMInfKK <- function(object, ...)
+{ 
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMInfKK  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 ############################################################
 ############################################################
@@ -2231,9 +2527,23 @@ Pn.o_MMInf         <- function(x, ...) { x$Pn }
 Qn.o_MMInf         <- function(x, ...) { x$Qn }
 Throughput.o_MMInf <- function(x, ...) { x$Throughput }
 
+Report.o_MMInf <- function(x, ...)
+{ 
+  reportAux(x)
+}
+
+
 summary.o_MMInf <- function(object, ...)
 { 
-  summaryAux(object)
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMInf  <- function(x, ...)
+{
+  print_summary(x, ...)
 }
 
 
@@ -2414,9 +2724,23 @@ Qn.o_MM1K         <- function(x, ...) { x$Qn }
 Throughput.o_MM1K <- function(x, ...) { x$Throughput }
 
 
+Report.o_MM1K <- function(x, ...)
+{ 
+  reportAux(x)
+}
+
+
 summary.o_MM1K <- function(object, ...)
 { 
-  summaryAux(object)
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MM1K  <- function(x, ...)
+{
+  print_summary(x, ...)
 }
 
 
@@ -2615,9 +2939,23 @@ Qn.o_MMCK         <- function(x, ...) { x$Qn }
 Throughput.o_MMCK <- function(x, ...) { x$Throughput }
 
 
+Report.o_MMCK <- function(x, ...)
+{ 
+  reportAux(x)
+}
+
+
 summary.o_MMCK <- function(object, ...)
 { 
-  summaryAux(object)
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMCK  <- function(x, ...)
+{
+  print_summary(x, ...)
 }
 
 
@@ -2769,11 +3107,24 @@ Pn.o_MMCC         <- function(x, ...) { x$Pn }
 Qn.o_MMCC         <- function(x, ...) { x$Qn }
 Throughput.o_MMCC <- function(x, ...) { x$Throughput }
 
-summary.o_MMCC <- function(object, ...)
+Report.o_MMCC <- function(x, ...)
 {
-  summaryAux(object)  
+  reportAux(x)  
 }
 
+
+summary.o_MMCC <- function(object, ...)
+{ 
+  aux <- list(el=CompareQueueingModels(object))
+  class(aux) <- "summary.o_MM1"
+  aux
+}
+
+
+print.summary.o_MMCC  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 ###############################################################
 ###############################################################
@@ -2996,10 +3347,25 @@ Wk.o_OJN          <- function(x, ...) { x$Wk }
 Pn.o_OJN          <- function(x, ...) { x$Pn }
 
 
-summary.o_OJN <- function(object, ...)
+Report.o_OJN <- function(x, ...)
 {
-  summarySingleClass(object)  
+  reportSingleClass(x)  
 }
+
+
+summary.o_OJN <- function(object, ...)
+{ 
+  aux <- list(el=summarySingleClass(object))
+  class(aux) <- "summary.o_OJN"
+  aux
+}
+
+
+print.summary.o_OJN  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
+
 
 #######################################################################################
 ## Closed Jackson Network
@@ -3451,9 +3817,23 @@ Lk.o_CJN          <- function(x, ...) { x$Lk }
 Wk.o_CJN          <- function(x, ...) { x$Wk }
 Throughputn.o_CJN <- function(x, ...) { x$Throughputn }
 
-summary.o_CJN <- function(object, ...)
+Report.o_CJN <- function(x, ...)
 {
-  summarySingleClass(object)
+  reportSingleClass(x)
+}
+
+
+summary.o_CJN <- function(object, ...)
+{ 
+  aux <- list(el=summarySingleClass(object))
+  class(aux) <- "summary.o_CJN"
+  aux
+}
+
+
+print.summary.o_CJN  <- function(x, ...)
+{
+  print_summary(x, ...)
 }
 
 
@@ -3664,11 +4044,24 @@ Lck.o_MCON          <- function(x, ...) { x$Lck }
 Throughputck.o_MCON <- function(x, ...) { x$Throughputck }
 
 
-summary.o_MCON <- function(object, ...)
+Report.o_MCON <- function(x, ...)
 {   
-  summaryMultiClass(object)
+  reportMultiClass(x)
 }
 
+
+summary.o_MCON <- function(object, ...)
+{ 
+  aux <- list(el=summaryMultiClass(object))
+  class(aux) <- "summary.o_MCON"
+  aux
+}
+
+
+print.summary.o_MCON  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
 
 #######################################################################################
@@ -4087,9 +4480,23 @@ Wck.o_MCCN          <- function(x, ...) { x$Wck }
 Throughputck.o_MCCN <- function(x, ...) { x$Throughputck }
 Throughputcn.o_MCCN <- function(x, ...) { x$Throughputcn }
 
-summary.o_MCCN <- function(object, ...)
+Report.o_MCCN <- function(x, ...)
 {   
-  summaryMultiClass(object)  
+  reportMultiClass(x)  
+}
+
+
+summary.o_MCCN <- function(object, ...)
+{ 
+  aux <- list(el=summaryMultiClass(object))
+  class(aux) <- "summary.o_MCCN"
+  aux
+}
+
+
+print.summary.o_MCCN  <- function(x, ...)
+{
+  print_summary(x, ...)
 }
 
 
@@ -4148,20 +4555,20 @@ QueueingModel.i_MCMN <- function(x, ...)
   #Solve the open model
   openModel <- QueueingModel(openInput)
 
-  openInflated <- 1 - ROk(openModel) ;
+  openInflated <- 1 - ROk(openModel)
 
   closedInput <- NewInput.MCCN(numCC, x$vNumber, x$vThink, x$nodes,
      x$vType, x$vVisit[(numOC+1):x$classes, ],
      (x$vService[(numOC+1):x$classes, ])/matrix(openInflated, nrow=numCC, ncol=x$nodes, byrow=TRUE),
     x$method, x$tol)
 
-  #Solve the open model
+  #Solve the closed model
   closedModel <- QueueingModel(closedInput)
 
   closedROck <- Throughputck(closedModel) * x$vVisit[(numOC+1):x$classes, ] * x$vService[(numOC+1):x$classes, ]
 
   openWck <- Wck(openModel) * (1 + t(array(Lk(closedModel), dim=c(x$nodes, numCC))))
-  openLck <- t(array(x$vLambda, dim=c(x$nodes, numOC))) * openWck 
+  openLck <- Throughputck(openModel) * openWck 
   
   
   # Build the complete result
@@ -4177,15 +4584,15 @@ QueueingModel.i_MCMN <- function(x, ...)
   Lk <- colSums(Lck)
   Throughputk <- colSums(Throughputck)
   ROk <- colSums(ROck)
-
+  
   L <- sum(Lc)
   Throughput <- sum(Throughputc)
-  RO <- sum(ROc)
-
-  Wc <- colSums(Wck)
+  W <- L / Throughput
 
   Wk <- colSums(Wck * array(Throughputc, dim=c(x$classes, x$nodes)))/Throughput
-  W <- (Wc * Throughputc)/Throughput
+  Wc <- rowSums(Wck * matrix(data=Throughputk, nrow=x$classes, ncol=x$nodes, byrow = TRUE))/Throughput
+  
+  # W <- (Wc * Throughputc)/Throughput <-- to check that values are correct
 
   res <-
     list(
@@ -4227,9 +4634,22 @@ Lck.o_MCMN          <- function(x, ...) { x$Lck }
 Wck.o_MCMN          <- function(x, ...) { x$Wck }
 Throughputck.o_MCMN <- function(x, ...) { x$Throughputck }
 
-summary.o_MCMN <- function(object, ...)
+Report.o_MCMN <- function(x, ...)
 {   
-  summaryMultiClass(object)  
+  reportMultiClass(x)  
 }
 
+
+summary.o_MCMN <- function(object, ...)
+{ 
+  aux <- list(el=summaryMultiClass(object))
+  class(aux) <- "summary.o_MCMN"
+  aux
+}
+
+
+print.summary.o_MCMN  <- function(x, ...)
+{
+  print_summary(x, ...)
+}
 
