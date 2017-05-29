@@ -1,6 +1,6 @@
 Package: queueing
-Version: 0.2.9
-Date: 2017-03-20
+Version: 0.2.10
+Date: 2017-05-13
 Title: Analysis of Queueing Networks and Models
 Author: Pedro Canadilla
 Maintainer: Pedro Canadilla <pedro.canadilla@gmail.com>
@@ -18,6 +18,6 @@ License: GPL-2
 Copyright: Pedro Canadilla
 URL: https://www.r-project.org
 NeedsCompilation: no
-Packaged: 2017-03-20 18:26:27 UTC; oracle
+Packaged: 2017-05-28 18:26:02 UTC; oracle
 Repository: CRAN
-Date/Publication: 2017-03-21 06:50:59 UTC
+Date/Publication: 2017-05-29 06:58:57 UTC

@@ -14,7 +14,7 @@ NewInput.MMC(lambda=0, mu=0, c=1, n=0, method=0)
   \item{lambda}{arrival rate}
   \item{mu}{server service rate}
   \item{c}{number of servers}
-  \item{n}{number of customers in the system. Put n=0 for a idle probability. With n=-1, no probabilities are computed}
+  \item{n}{number of customers in the system from which you want to obtain its probabilities. Put n=0 for a idle probability (no customer present in the system or system idle). With n=-1, no probabilities are computed}
   \item{method}{method of computation of the probabilities of n number of customers in the system. With method=0, the exact results are calculated using the formal definition. With method=1, aproximate results are calculated using Stirling aproximation of factorials and logaritms.}
 }
 
