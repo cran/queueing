@@ -1,3 +1,6 @@
+2017-11-13 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * Included unit test with testthat package.
+
 2017-05-29 Pedro Canadilla <pedro.canadilla@gmail.com>
     * For the M/M/1, M/M/c and M/M/Infinte models, the parameter has been updated to the following description: "number of customers in the system from which you want to obtain its probabilities. Put n=0 for a idle probability (no customer present in the system or system idle). With n=-1, no probabilities are computed". No changes has been done in source code.
 

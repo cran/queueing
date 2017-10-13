@@ -1,5 +1,5 @@
-4f1b8020be1da1b099c0925b3e68f13c *ChangeLog
-6b9e41e3e94773698cf96ee31fe6accd *DESCRIPTION
+e13e8f9b38347347851166b98c680039 *ChangeLog
+b497e49e1a5a932e8aa0dedd53982af8 *DESCRIPTION
 8900804480ebc417574c3d3647e97fdf *NAMESPACE
 f13f0b71c5f7a326d2fc2d5652ee113e *R/CJN.R
 41454c6935aff26baf37f47006dd7b55 *R/MCCN.R
@@ -350,3 +350,8 @@ af0c47fb0f412a758637d88f53e9e3a1 *man/summary.o_MMCC.Rd
 19a9635378bfad822eee78e4407f6543 *man/summary.o_MMInf.Rd
 77a4b2ca2183a8cdbd5deaea2a666ea5 *man/summary.o_MMInfKK.Rd
 fcc1122803aaf0e716616b1472e253bb *man/summary.o_OJN.Rd
+da82a833a909c93e37e33ff6c36e1e58 *tests/testthat.R
+7219350159d5c275523f38623526c9a0 *tests/testthat/test-basic-performance-metrics.R
+cf4f98f7e75a9055f1abb5ce6069523f *tests/testthat/test-calculators.R
+dbc4820ea573c24f37b04f89fa6ce681 *tests/testthat/test-classes.R
+7b4737bede8397e0e76f2230a85de52d *tests/testthat/test-networks-basic-performance-metrics.R
