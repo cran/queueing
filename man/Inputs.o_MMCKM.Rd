@@ -33,7 +33,7 @@ i_mmckm <- NewInput.MMCKM(lambda=0.25, mu=4, c=2, k=4, m=8, method=0)
 ## Build the model
 o_mmckm <- QueueingModel(i_mmckm)
 
-## Retunns the Inputs
+## It returns the Inputs
 Inputs(o_mmckm)
 }
 

@@ -1,3 +1,11 @@
+2019-12-09 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * Solved class(x) == "something" with inherits(x, "something") as suggested by CRAN team.
+    * General Birth and Death Process model
+
+2019-05-04 Pedro Canadilla <pedro.canadilla@gmail.com>
+    * Removed unit test with testthat package.
+    * General Birth and Death Process model
+
 2017-11-13 Pedro Canadilla <pedro.canadilla@gmail.com>
     * Included unit test with testthat package.
 

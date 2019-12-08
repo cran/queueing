@@ -22,7 +22,7 @@ CheckInput.i_MMCKM <- function(x, ...)
   MMCKM_method <- "method variable has to be 0 to be exact calculus, 1 to be aproximate calculus"
   MMCKM_m_integer <- "the poblation (m) must be an integer number"
 
- if (class(x) != "i_MMCKM")
+ if (!inherits(x, "i_MMCKM"))
   stop(MMCKM_class)
 
  if (is.anomalous(x$lambda) || is.anomalous(x$mu) ||

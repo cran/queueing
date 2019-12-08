@@ -17,8 +17,7 @@ CheckInput.i_MMCKK <- function(x, ...)
   MMCKK_anomalous <- "Some value of lambda, mu, c or k is anomalous. Check the values."
   MMCKK_method <- "method variable has to be 0 to be exact calculus, 1 to be aproximate calculus"
 
-
-  if (class(x) != "i_MMCKK")
+  if (!inherits(x, "i_MMCKK"))
     stop(MMCKK_class)
 
   if (is.anomalous(x$lambda) || is.anomalous(x$mu) ||

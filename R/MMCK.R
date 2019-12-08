@@ -15,7 +15,7 @@ CheckInput.i_MMCK <- function(x, ...)
   MMCK_class <- "the class of the object x has to be M/M/C/K (i_MMCK)"
   MMCK_anomalous <- "Some value of lambda, mu, c or k is anomalous. Check the values."
 
- if (class(x) != "i_MMCK")
+ if (!inherits(x, "i_MMCK"))
    	stop(MMCK_class)
 
  if (is.anomalous(x$lambda) || is.anomalous(x$mu) ||

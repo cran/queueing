@@ -34,7 +34,7 @@ i_mm1k <- NewInput.MM1K(lambda=5, mu=5.714, k=15)
 ## Build the model
 o_mm1k <- QueueingModel(i_mm1k)
 
-## Retunns the Inputs
+## It returns the Inputs
 Inputs(o_mm1k)
 }
 

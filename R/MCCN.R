@@ -48,7 +48,7 @@ CheckInput.i_MCCN <- function(x, ...)
   )
     stop(MCCN_x_anomalous)
 
-  if (class(x) != "i_MCCN")
+  if (!inherits(x, "i_MCCN"))
     stop(MCCN_x_class)
 
   # Check negatives, zero or one in parameters
@@ -90,10 +90,10 @@ CheckInput.i_MCCN <- function(x, ...)
     stop(MCCN_dimension_visit_service)
 
   # classes
-  if (class(x$vVisit) != "matrix")
+  if (!inherits(x$vVisit, "matrix"))
     stop(MCCN_vVisit_class_matrix)
 
-  if (class(x$vService) != "matrix")
+  if (!inherits(x$vService, "matrix"))
     stop(MCCN_vService_class_matrix)
 
   if (sum(dim(x$vVisit) == c(length(x$vNumber), x$nodes)) != 2)

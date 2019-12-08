@@ -5,7 +5,8 @@ is.anomalous <- function(x)
 {
   # is.nan(x) doesn't work for lists
   #is.null(x) || is.na(x) || is.nan(x)
-  is.null(x) || is.na(x)
+  #is.null(x) || is.na(x)
+  is.null(x) || anyNA(x)
 }
 
 is.wholenumber <- function(x, tol = .Machine$double.eps^0.5)  abs(x - round(x)) < tol
@@ -352,11 +353,9 @@ tpoisson <- function(n, maximum, lambda)
 
 reportAux <- function(object)
 { 
-  oclass <- class(object)
-
   Ls <- object$L - object$Lq
 
-  if (oclass == "o_MM1")
+  if (inherits(object, "o_MM1"))
   {
     cat("The inputs of the M/M/1 model are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", n: ", object$Inputs$n, "\n", sep=""))
@@ -367,7 +366,7 @@ reportAux <- function(object)
     cat(object$Pn)
     cat("\n")
   }  
-  else if (oclass == "o_MMCKM")
+  else if (inherits(object, "o_MMCKM"))
   {
     cat("The inputs of the model M/M/c/K/m are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", c: ", object$Inputs$c, ", k: ", object$Inputs$k, " ,m: ", object$Inputs$m, ", method: ", object$Inputs$method, "\n", sep=""))
@@ -379,7 +378,7 @@ reportAux <- function(object)
     cat("\n")
     cat(paste("The mean think time is : ", 1/object$Inputs$lambda, "\n", sep=""))
   }
-  else if (oclass == "o_MMC")
+  else if (inherits(object, "o_MMC"))
   {
     method <- if (object$Inputs$method == 0) "Exact" else "Aprox"
 
@@ -392,7 +391,7 @@ reportAux <- function(object)
     cat(object$Pn)
     cat("\n")
   }
-  else if (oclass == "o_MM1KK")
+  else if (inherits(object, "o_MM1KK"))
   {
     cat("The inputs of the model M/M/1/K/K are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", k: ", object$Inputs$k, ", method: ", object$Inputs$method, "\n", sep=""))
@@ -404,7 +403,7 @@ reportAux <- function(object)
     cat("\n")
     cat(paste("The mean think time is : ", 1/object$Inputs$lambda, "\n", sep=""))
   }
-  else if (oclass == "o_MMCKK")
+  else if (inherits(object, "o_MMCKK"))
   {
     cat("The inputs of the model M/M/c/K/K are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", c: ", object$Inputs$c, ", k: ", object$Inputs$k, ", method: ", object$Inputs$method, "\n", sep=""))
@@ -416,7 +415,7 @@ reportAux <- function(object)
     cat("\n")
     cat(paste("The mean think time is : ", 1/object$Inputs$lambda, "\n", sep=""))
   }
-  else if (oclass == "o_MMCKM")
+  else if (inherits(object, "o_MMCKM"))
   {
     cat("The inputs of the model M/M/c/K/m are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", c: ", object$Inputs$c, ", k: ", object$Inputs$k, " ,m: ", object$Inputs$m, ", method: ", object$Inputs$method, "\n", sep=""))
@@ -428,7 +427,7 @@ reportAux <- function(object)
     cat("\n")
     cat(paste("The mean think time is : ", 1/object$Inputs$lambda, "\n", sep=""))
   }
-  else if (oclass == "o_MMInfKK")
+  else if (inherits(object, "o_MMInfKK"))
   {
     cat("The inputs of the model M/M/Inf/K/K are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", k: ", object$Inputs$k, ", method: ", object$Inputs$method, "\n", sep=""))
@@ -440,7 +439,7 @@ reportAux <- function(object)
     cat("\n")
     cat(paste("The mean think time is : ", 1/object$Inputs$lambda, "\n", sep=""))
   }
-  else if (oclass == "o_MMInf")
+  else if (inherits(object, "o_MMInf"))
   {
     cat("The inputs of the model M/M/Infinite are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", n: ", object$Inputs$n, "\n", sep=""))
@@ -451,7 +450,7 @@ reportAux <- function(object)
     cat(object$Pn)
     cat("\n")  
   }
-  else if (oclass == "o_MM1K")
+  else if (inherits(object, "o_MM1K"))
   {
     cat("The inputs of the model M/M/1/K are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", k: ", object$Inputs$k, "\n", sep=""))
@@ -465,7 +464,7 @@ reportAux <- function(object)
     cat(object$Qn)
     cat("\n")
   }
-  else if (oclass == "o_MMCK")
+  else if (inherits(object, "o_MMCK"))
   {
     cat("The inputs of the model M/M/c/K are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", c: ", object$Inputs$c, ", k: ", object$Inputs$k, "\n", sep=""))
@@ -476,7 +475,7 @@ reportAux <- function(object)
     cat(object$Pn)
     cat("\n")
   }
-  else if (oclass == "o_MMCC")
+  else if (inherits(object, "o_MMCC"))
   { 
     cat("The inputs of the model M/M/c/c are:\n")
     cat(paste("lambda: ", object$Inputs$lambda, ", mu: ", object$Inputs$mu, ", c: ", object$Inputs$c, "\n", sep=""))
@@ -499,12 +498,39 @@ reportAux <- function(object)
   cat(paste("The mean time spend in the queue when there is queue is: ", object$Wqq, "\n", sep=""))
   cat(paste("The throughput is: ", object$Throughput, "\n", sep=""))
 
-  if (oclass == "o_MM1KK")
+  if (inherits(object, "o_MM1KK"))
   {
     cat(paste("The normalized average response time is: ", object$WWs, "\n", sep=""))
     cat(paste("The saturation point is: ", object$SP, "\n", sep=""))
   }  
 }
+
+
+
+############################################################
+############################################################
+## FUNTION TO REPORT BIRTH AND DEATH PROCESS
+############################################################
+############################################################
+
+reportBnD <- function(object)
+{ 
+
+  if (inherits(object, "o_BnD"))
+  {
+    cat("The inputs of the Birth and Death model are:\n\n")
+    print(object$Inputs)
+    cat("\n\n")
+    
+    cat(paste("The outputs of the Birth and Death model are:", "\n\n", sep=""))
+    cat(paste("The mean number of clients in the system is: ", object$L, "\n", sep=""))
+    cat(paste("The probability (p0, p1, ..., pn) of the clients in the system are:\n"))
+    cat(object$Pn)
+    cat("\n\n")
+  }
+  
+}
+
 
 
 ############################################################
@@ -516,9 +542,7 @@ reportAux <- function(object)
 reportSingleClass <- function(object)
 {
    
-  classObject <- class(object)
-
-  if (classObject == "o_OJN")
+  if (inherits(object, "o_OJN"))
     cat("The inputs of the open Jackson network are:\n\n")
   else # has to be o_CJN
     cat("The inputs of the closed Jackson network are:\n\n")
@@ -526,7 +550,7 @@ reportSingleClass <- function(object)
   print(object$Inputs)
   cat("\n\n")
 
-  if (classObject == "o_OJN")
+  if (inherits(object, "o_OJN"))
     cat(paste("The outputs of the open Jackson network are:", "\n\n", sep=""))
   else # has to be o_CJN
     cat("The outputs of the closed Jackson network are:\n\n")
@@ -548,7 +572,7 @@ reportSingleClass <- function(object)
     cat(paste("The mean number of clients in node ", i, " is: ", object$Lk[i], "\n", sep=""))
     cat(paste("The mean time spend in node ", i, " is: ", object$Wk[i], "\n", sep=""))
 
-    if (classObject == "o_OJN")
+    if (inherits(object, "o_OJN"))
     {
       cat(paste("The probability (p0, p1, ..., pn) or visit ratio of node ", i, " is: ", "\n", sep=""))
       print(object$Pn[[i]])  
@@ -568,12 +592,12 @@ reportSingleClass <- function(object)
 
 reportMultiClass <- function(object)
 {
-  if (class(object) != "o_MCON" && class(object) != "o_MCCN" && class(object) != "o_MCMN")
+  if (!inherits(object, c("o_MCON", "o_MCCN", "o_MCMN")))
     stop("Incorrect class")
 
-  if (class(object) == "o_MCON")
+  if (inherits(object, "o_MCON"))
     netType <- "open"
-  else if (class(object) == "o_MCCN")
+  else if (inherits(object, "o_MCCN"))
     netType <- "closed"
   else
     netType <- "mixed"
@@ -641,11 +665,10 @@ CompareQueueingModels2 <- function(models)
   # Check that every object has the correct class
   for (i in 1:num_elems)
   {
-    classm <- class(models[[i]])
-    if (!(classm == "o_MM1" || classm == "o_MMC" || classm == "o_MM1K" || classm == "o_MMCK" ||
-      classm == "o_MMCC" || classm == "o_MMInf" || classm == "o_MMInfKK" || classm == "o_MM1KK" ||
-      classm == "o_MMCKK" || classm == "o_MMCKM"))
-    stop("Function called with incorrect class")
+    m <- models[[i]]
+    #print(classm)
+    if (!inherits(m, c("o_MM1", "o_MMC", "o_MM1K", "o_MMCK", "o_MMCC", "o_MMInf", "o_MMInfKK", "o_MM1KK", "o_MMCKK", "o_MMCKM")))
+      stop(paste("Function called with incorrect class: ", class(m)))
   }
 
   #build the table
@@ -667,31 +690,30 @@ CompareQueueingModels2 <- function(models)
   for (i in (1:num_elems))
   {
     mod <- models[[i]]
-    classm <- class(mod)   
 
     lambda <- c(lambda, mod$Inputs$lambda)
     mu <- c(mu, mod$Inputs$mu)
 
-    if (classm == "o_MMInf" || classm == "o_MMInfKK")
+    if (inherits(mod, c("o_MMInf", "o_MMInfKK")))
       c <- c(c, NA)
-    else if (classm == "o_MM1" || classm == "o_MM1K" || classm == "o_MM1KK")
+    else if (inherits(mod, c("o_MM1", "o_MM1K", "o_MM1KK")))
       c <- c(c, 1)
     else
       c <- c(c, mod$Inputs$c)
 
-    if (classm == "o_MMInf" || classm == "o_MM1" || classm == "o_MMC")
+    if (inherits(mod, c("o_MMInf", "o_MM1", "o_MMC")))
       k <- c(k, NA)
-    else if (classm == "o_MMCC")
+    else if (inherits(mod, "o_MMCC"))
       k <- c(k, mod$Inputs$c)
     else
       k <- c(k, mod$Inputs$k)
 
-    if (classm != "o_MMCKM")
+    if (!inherits(mod, "o_MMCKM"))
       m <- c(m, NA)
     else
       m <- c(m, mod$Inputs$m)
 
-    if (classm == "o_MMInf" || classm == "o_MM1" || classm == "o_MMC")
+    if (inherits(mod, c("o_MMInf", "o_MM1", "o_MMC")))
     {
       if (mod$Inputs$n >= 0)
         P0 <- c(P0, mod$Pn[1])
@@ -736,9 +758,7 @@ CompareQueueingModels <- function(model, ...)
 summarySingleClass <- function(object)
 {
 
-  classObject <- class(object)
-
-  if (class(object) != "o_OJN" && class(object) != "o_CJN")
+  if (!inherits(object, c("o_OJN", "o_CJN")))
     stop("Incorrect class")
 
   #build the table
@@ -807,7 +827,8 @@ summarySingleClass <- function(object)
 
 summaryMultiClass <- function(object)
 {
-  if (class(object) != "o_MCON" && class(object) != "o_MCCN" && class(object) != "o_MCMN")
+  
+  if (!inherits(object, c("o_MCON", "o_MCCN", "o_MCMN")))
     stop("Incorrect class")
 
 
@@ -951,5 +972,40 @@ summaryMultiClass <- function(object)
   # Rowname change
   rownames(res) <- rnames
   res  
+  
+}
+
+############################################################
+############################################################
+## FUNTION TO SUMMARIZE BIRTH AND DEATH PROCESS 
+############################################################
+############################################################
+
+summaryBnD <- function(object)
+{
+  
+  if (!inherits(object, "o_BnD"))
+    stop("Incorrect class")
+  
+  #build the table
+  n <- length(object$Pn)
+  
+  lambda <- rep(NA, n)
+  mu     <- rep(NA, n)
+  
+  # complete network
+  lambda[1:(n-1)] <- object$Inputs$lambda
+  mu[2:n]         <- object$Inputs$mu
+  Pn              <- object$Pn
+  state           <- 0:(n-1)
+  L               <- rep(object$L, n)
+  
+  res <-
+    data.frame(
+      state = state, lambda = lambda, mu = mu, Pn = Pn, L = L
+    )
+  
+  rownames(res) <- seq(from=1, to=n, by=1)
+  res
   
 }

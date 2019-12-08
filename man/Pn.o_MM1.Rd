@@ -16,7 +16,7 @@
   \item{\dots}{aditional arguments}
 }
 
-\details{Pn returns the probabilities that a M/M/1/K queueing model has n customers.\cr
+\details{Pn returns the probabilities that a M/M/1 queueing model has n customers.\cr
 Qn returns the probabilities that an arrival that enter the system see n customers. By the PASTA property, both probabilities has to be the same.}
 
 \references{

@@ -17,8 +17,7 @@ CheckInput.i_MM1KK <- function(x, ...)
   MM1KK_anomalous <- "Some value of lambda, mu or k is anomalous. Check the values."
   MM1KK_method    <- "method variable has to be 0 to be exact calculus, 1 to be aproximate calculus, 2 to use Jain's Method or 3 to use Poisson truncated distribution"
 
-
- if (class(x) != "i_MM1KK")
+ if (!inherits(x, "i_MM1KK"))
    stop(MM1KK_class)
 
  if (is.anomalous(x$lambda) || is.anomalous(x$mu) || is.anomalous(x$k))

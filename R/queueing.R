@@ -41,6 +41,7 @@ Report         <- function(x, ...) UseMethod("Report")
 ## Error Messages
 ############################################################
 ALL_mu_positive      <- "mu must be greater than zero"
+ALL_lambda_positive  <- "lambda must be greater than zero"
 ALL_lambda_zpositive <- "lambda must be equal or greater than zero"
 ALL_n_integer        <- "the number of clients must be an integer number"
 ALL_c_integer        <- "the number of servers (c) must be an integer number"

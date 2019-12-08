@@ -15,7 +15,7 @@ CheckInput.i_MCMN <- function(x, ...)
 {
 
   # Ckeck the class
-  if (class(x) != "i_MCMN")
+  if (!inherits(x, "i_MCMN"))
     stop("The class of the object has to be i_MCMN")
 
   numOC <- length(x$vLambda)

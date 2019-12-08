@@ -61,7 +61,7 @@ CheckInput.i_CJN <- function(x, ...)
  )
     stop(x_anomalous)
 
- if (class(x) != "i_CJN")
+ if (!inherits(x, "i_CJN"))
    stop(x_class_CJN) 
 
  if (x$n <= 0)
@@ -75,7 +75,7 @@ CheckInput.i_CJN <- function(x, ...)
  if (!(x$tol > 0))
    stop(CJN_tol_value)
 
- is_prob_a_matrix <- (class(x$prob) == "matrix")
+ is_prob_a_matrix <- inherits(x$prob, "matrix")
 
  if (is_prob_a_matrix)
  {
@@ -91,7 +91,7 @@ CheckInput.i_CJN <- function(x, ...)
      stop(visit_ratios_wrong)
  }
 
- if (class(x$operational) != "logical")
+ if (!inherits(x$operational, "logical"))
    stop(CJN_operational_logical) 
 
  i <- 1
@@ -101,12 +101,12 @@ CheckInput.i_CJN <- function(x, ...)
 
    if (x$method == 0)
    {
-     if (class(n) != "i_MM1" && class(n) != "i_MMC" && class(n) != "i_MMInf")
+     if (!inherits(n, c("i_MM1", "i_MMC", "i_MMInf")))
        stop(paste(paste("Node ", i), "is not of class i_MM1 or i_MMC or i_MMInf!!"))
    }
    else
    {
-     if (class(n) != "i_MM1" && class(n) != "i_MMInf")
+     if (!inherits(n, c("i_MM1", "i_MMInf")))
        stop(paste(paste("Node ", i), "is not of class i_MM1 or i_MMInf!!"))
    }
 
@@ -134,7 +134,7 @@ QueueingModelExact <- function(x, ...)
 
   Throughputn <- rep(0, x$n)
 
-  if (class(x$prob) == "matrix")
+  if (inherits(x$prob, "matrix"))
   {
     ident <- diag(dim(x$prob)[1])
     const <- matrix(data=1, nrow=dim(x$prob)[1], ncol=1)
@@ -163,7 +163,7 @@ QueueingModelExact <- function(x, ...)
   k <- 1
   while (k <= num_nodes)
   {
-    if (class(x$nodes[[k]]) == "i_MMC" && x$nodes[[k]]$c > 1)
+    if (inherits(x$nodes[[k]], "i_MMC") && x$nodes[[k]]$c > 1)
       mclass <- c(mclass, list(array(0, dim=c(x$nodes[[k]]$c, x$n))))
     k <- k + 1
   }
@@ -226,12 +226,12 @@ QueueingModelExact <- function(x, ...)
     num_mmc <- 0
     while (k <= num_nodes)
     {
-      if (class(x$nodes[[k]]) == "i_MMInf")
+      if (inherits(x$nodes[[k]], "i_MMInf"))
         Wk[k] <-  1/x$nodes[[k]]$mu
       else
       {
-        if (class(x$nodes[[k]]) == "i_MM1" ||
-            (class(x$nodes[[k]]) == "i_MMC" && x$nodes[[k]]$c == 1)
+        if (inherits(x$nodes[[k]], "i_MM1") ||
+            (inherits(x$nodes[[k]], "i_MMC") && x$nodes[[k]]$c == 1)
            )
           {
             #print("entrando en node mm1")
@@ -292,9 +292,9 @@ QueueingModelExact <- function(x, ...)
   k <- 1
   while (k <= num_nodes)
   {
-    if (class(x$nodes[[k]]) == "i_MMInf")
+    if (inherits(x$nodes[[k]], "i_MMInf"))
       ROk[k] <- Lk[k]
-    else if (class(x$nodes[[k]]) == "i_MM1")
+    else if (inherits(x$nodes[[k]], "i_MM1"))
       ROk[k] <- Throughputk[k] * (1/x$nodes[[k]]$mu)
     else #class i_MMC  
       ROk[k] <- Throughputk[k] * (1/(x$nodes[[k]]$mu * x$nodes[[k]]$c))
@@ -337,7 +337,7 @@ QueueingModelApprox <- function(x, ...)
 
   Throughputn <- numeric()
 
-  if (class(x$prob) == "matrix")
+  if (inherits(x$prob, "matrix"))
   {
     ident <- diag(dim(x$prob)[1])
     const <- matrix(data=1, nrow=dim(x$prob)[1], ncol=1)
@@ -373,7 +373,7 @@ QueueingModelApprox <- function(x, ...)
     acum <- 0
     for (i in (1:num_nodes))
     {
-      if (class(x$nodes[[i]]) == "i_MMInf")
+      if (inherits(x$nodes[[i]], "i_MMInf"))
         Wk[i] <- 1/x$nodes[[i]]$mu
       else
         Wk[i] <- 1/x$nodes[[i]]$mu * (1 + Arrk[i])
@@ -401,7 +401,7 @@ QueueingModelApprox <- function(x, ...)
 
   for (i in (1:num_nodes))
   {
-    if (class(x$nodes[[i]]) == "i_MMInf")
+    if (inherits(x$nodes[[i]], "i_MMInf"))
       ROk[i] <- Lk[i] 
     else
       ROk[i] <- Throughputk[i] * (1/x$nodes[[i]]$mu)

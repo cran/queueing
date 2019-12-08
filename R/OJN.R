@@ -23,13 +23,13 @@ newNodes <- function(rawNodes, arrivals)
   i <- 1
   while (i <= length(rawNodes))
   {
-    rawNode = rawNodes[[i]] ;
-
-    if (class(rawNode) == "i_MM1")
+    rawNode = rawNodes[[i]]
+    
+    if (inherits(rawNode, "i_MM1"))
       res[[i]] <- NewInput.MM1(lambda = arrivals[i], mu = rawNode$mu, n = rawNode$n)
-    else if (class(rawNode) == "i_MMC")
+    else if (inherits(rawNode, "i_MMC"))
       res[[i]] <- NewInput.MMC(lambda = arrivals[i], mu = rawNode$mu, c = rawNode$c, n = rawNode$n)
-    else if (class(rawNode) == "i_MMInf")
+    else if (inherits(rawNode, "i_MMInf"))
       res[[i]] <- NewInput.MMInf(lambda = arrivals[i], mu = rawNode$mu, n = rawNode$n)
     else 
       stop(paste(paste("Node ", i), "is not of class i_MM1, i_MMC or i_MMInf !!"))
@@ -47,7 +47,7 @@ doModel <- function(x, newNodes, tLambda)
   Wk <- numeric()
   ROk <- numeric()
   Throughputk <- numeric()
-  is_prob_a_matrix <- (class(x$prob) == "matrix")
+  is_prob_a_matrix <- (inherits(x$prob, "matrix"))
   totalL <- 0
   
   i <- 1
@@ -103,12 +103,12 @@ CheckInput.i_OJN <- function(x, ...)
  prob_zero <- "If neither a routing x$prob is given nor a visit ratio vector, x$prob should be 0"
  all_lambda_equals <- "if visit ratios are given, all nodes must have the same lambda (the sum of all external arrivals)"
  
- is_prob_a_matrix <- (class(x$prob) == "matrix")
+ is_prob_a_matrix <- (inherits(x$prob, "matrix"))
 
  if (is.anomalous(x$prob) || is.anomalous(x$nodes))
     stop(x_anomalous)
 
- if (class(x) != "i_OJN")
+ if (!inherits(x, "i_OJN"))
    stop(x_class_OJN) 
 
  num_nodes <- length(x$nodes)
@@ -132,7 +132,7 @@ CheckInput.i_OJN <- function(x, ...)
  {
    n = x$nodes[[i]]
 
-   if (class(n) != "i_MM1" && class(n) != "i_MMC" && class(n) != "i_MMInf")
+   if (!inherits(n, c("i_MM1", "i_MMC", "i_MMInf")))
      stop(paste(paste("Node ", i), "is not of class i_MM1, i_MMC or i_MMInf!!"))
    
    if (!is_prob_a_matrix && (x$nodes[[i]]$lambda != x$nodes[[1]]$lambda))
@@ -149,8 +149,8 @@ CheckInput.i_OJN <- function(x, ...)
 QueueingModel.i_OJN <- function(x, ...)
 {
   CheckInput(x)
-
-  if (class(x$prob) == "matrix")
+  
+  if (inherits(x$prob, "matrix"))
   {
     vlambda <- -clambda(x$nodes)
     tProb <- t(x$prob) 

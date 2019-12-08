@@ -16,7 +16,7 @@ CheckInput.i_MMInf <- function(x, ...)
   MMInf_class <- "The class of the object x has to be M/M/Inf (i_MMInf)"
   MMInf_anomalous <- "Some value of lambda, mu, or n is anomalous. Check the values."
 
-  if (class(x) != "i_MMInf")
+  if (!inherits(x, "i_MMInf"))
    	stop(MMInf_class)	
 
   if (is.anomalous(x$lambda) || is.anomalous(x$mu) || is.anomalous(x$n))

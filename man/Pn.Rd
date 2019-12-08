@@ -12,7 +12,7 @@
   Qn(x, \dots)
 }
 \arguments{
-  \item{x}{For Pn, an object of class o_MM1, o_MMC, o_MM1K, o_MMCK, o_MM1KK, o_MMCKK, o_MMCC, o_MMCKM, o_MMInfKK, o_MMInf, o_OJN. For Qn, an object of class o_MM1, o_MMC, o_MM1K, o_MMCK, o_MM1KK, o_MMCKK, o_MMCC, o_MMCKM, o_MMInfKK, o_MMInf}
+  \item{x}{For Pn, an object of class o_MM1, o_MMC, o_MM1K, o_MMCK, o_MM1KK, o_MMCKK, o_MMCC, o_MMCKM, o_MMInfKK, o_MMInf, o_OJN, o_BnD. For Qn, an object of class o_MM1, o_MMC, o_MM1K, o_MMCK, o_MM1KK, o_MMCKK, o_MMCC, o_MMCKM, o_MMInfKK, o_MMInf}
   \item{\dots}{aditional arguments}
 }
 
@@ -45,7 +45,8 @@ Editorial Centro de Estudios Ramon Areces.
   \code{\link{Qn.o_MMInfKK}}\cr
   \code{\link{Pn.o_MMInf}}\cr
   \code{\link{Qn.o_MMInf}}\cr
-  \code{\link{Pn.o_OJN}}
+  \code{\link{Pn.o_OJN}}\cr
+  \code{\link{Pn.o_BnD}}
 }
 
 

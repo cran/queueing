@@ -33,7 +33,7 @@ CheckInput.i_MCON <- function(x, ...)
   )
     stop(x_anomalous)
 
-  if (class(x) != "i_MCON")
+  if (!inherits(x, "i_MCON"))
     stop(x_class_MCON)
 
   # Check negatives in parameters
@@ -58,10 +58,10 @@ CheckInput.i_MCON <- function(x, ...)
   if (sum(dimVisit == dim(x$vService)) != 2)
     stop(MCON_dimension_visit_service)
 
-  if (class(x$vVisit) != "matrix")
+  if (!inherits(x$vVisit, "matrix"))
     stop(MCON_vVisit_class_matrix)
 
-  if (class(x$vService) != "matrix")
+  if (!inherits(x$vService, "matrix"))
     stop(MCON_vService_class_matrix)
 
   if (sum(dimVisit == c(x$classes, x$nodes)) != 2)

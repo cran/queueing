@@ -16,7 +16,7 @@ CheckInput.i_MM1K <- function(x, ...)
   MM1K_class <- "the class of the object x has to be M/M/1/K (i_MM1K)"
   MM1K_anomalous <- "Some value of lambda, mu, or k is anomalous. Check the values."
 
-  if (class(x) != "i_MM1K")
+  if (!inherits(x, "i_MM1K"))
    	stop(MM1K_class)	
 
   if (is.anomalous(x$lambda) || is.anomalous(x$mu) || is.anomalous(x$k))

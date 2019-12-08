@@ -17,7 +17,7 @@ CheckInput.i_MMCC <- function(x, ...)
   MMCC_anomalous <- "Some value of lambda, mu or c is anomalous. Check the values."
   MMCC_method    <- "method variable has to be 0 to be definiton calculus, 1 to be exact calculus"
 
-  if (class(x) != "i_MMCC")
+  if (!inherits(x, "i_MMCC"))
     stop(MMCC_class)
 
   if (is.anomalous(x$lambda) || is.anomalous(x$mu) || is.anomalous(x$c))

@@ -34,7 +34,7 @@ i_mmcc <- NewInput.MMCC(lambda=3, mu=0.25, c=15)
 ## Build the model
 o_mmcc <- QueueingModel(i_mmcc)
 
-## Retunns the Inputs
+## It returns the Inputs
 Inputs(o_mmcc)
 }
 

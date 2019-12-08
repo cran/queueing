@@ -33,7 +33,7 @@ i_mminf <- NewInput.MMInf(lambda=0.25, mu=4, n=0)
 ## Build the model
 o_mminf <- QueueingModel(i_mminf)
 
-## Retunns the Inputs
+## It returns the Inputs
 Inputs(o_mminf)
 }
 
